@@ -35,14 +35,9 @@ if not os.path.exists(anyksciai_path):
 anyksciai_loader = TextLoader(anyksciai_path, encoding="utf-8")
 anyksciai_docs = anyksciai_loader.load()
 
-web_loader = WebBaseLoader(
-    web_paths=("https://lilianweng.github.io/posts/2017-06-21-overview/",),
-    bs_kwargs=dict(parse_only=bs4.SoupStrainer(class_=("post-content", "post-title", "post-header")))
-)
-web_docs = web_loader.load()
 
 wiki_loader = WebBaseLoader(
-    web_paths=("https://en.wikipedia.org/wiki/Panevėžys",)
+    web_paths=("https://en.wikipedia.org/wiki/Anykščiai",)
 )
 wiki_docs = wiki_loader.load()
 
@@ -51,8 +46,6 @@ def filter_docs(selected_sources):
     docs = []
     if "File" in selected_sources:
         docs += file_docs
-    if "Web" in selected_sources:
-        docs += web_docs
     if "Wikipedia" in selected_sources:
         docs += wiki_docs
     return docs
